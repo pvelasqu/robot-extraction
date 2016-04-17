@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <title>Remote Control Car with Node.js Server</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+<script type="text/javascript">
+    /* Copyright (C) 2007 Richard Atterer, richard©atterer.net
+       This program is free software; you can redistribute it and/or modify it
+       under the terms of the GNU General Public License, version 2. See the file
+       COPYING for details. */
+
+    var imageNr = 0; // Serial number of current image
+    var finished = new Array(); // References to img objects which have finished downloading
+    var paused = false;
+
+    function createImageLayer() {
+        var img = new Image();
+        img.style.position = "absolute";
+        img.style.zIndex = -1;
+        img.onload = imageOnload;
+        img.onclick = imageOnclick;
+        img.src = "http://192.168.1.100:8080/?action=snapshot&n=" + (++imageNr);
+        var webcam = document.getElementById("webcam");
+        webcam.insertBefore(img, webcam.firstChild);
+    }
+
+    // Two layers are always present (except at the very beginning), to avoid flicker
+    function imageOnload() {
+        this.style.zIndex = imageNr; // Image finished, bring to front!
+        while (1 < finished.length) {
+            var del = finished.shift(); // Delete old image(s) from document
+            del.parentNode.removeChild(del);
+        }
+        finished.push(this);
+        if (!paused) createImageLayer();
+    }
+
+    function imageOnclick() { // Clicking on the image will pause the stream
+        paused = !paused;
+        if (!paused) createImageLayer();
+    }
+</script>
+<html>
+
+<body onload="createImageLayer();">
+    <div id="webcam">
+        <noscript><img id="streamimage" src="/?action=snapshot" />
+        </noscript>
+    </div>
+    <ul id="gamepads"></ul>
+    <div class="container">
+        <div id="controls">
+            <div>
+                <button id="btn-up" type="button" class="btn btn-default btn-lg btn-up" aria-label="Up Button">
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="left-right-btn">
+                <button id="btn-left" type="button" class="btn btn-default btn-lg btn-left" aria-label="Left Button">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                </button>
+                <button id="btn-right" type="button" class="btn btn-default btn-lg btn-right" aria-label="Right Button">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div>
+                <button id="btn-down" type="button" class="btn btn-default btn-lg btn-down" aria-label="Down Button">
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                </button>
+            </div>
+            <p id="connect-notice">Connect your controller and press any button.</p>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/jquery.mobile-events.min.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="/js/async.js"></script>
+<script type="text/javascript" src="/js/gamepad.js"></script>
+<script type="text/javascript" src="/js/script.js"></script>
+
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "light",
+  "version": "1.0.0",
+  "description": "blinking light",
+  "main": "app.js",
+  "scripts": {
+    "test": "node "
+  },
+  "keywords": [
+    "blinking",
+    "light"
+  ],
+  "author": "rb",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.5.1",
+    "express": "^4.13.3",
+    "pi-gpio": "0.0.8",
+    "socket.io": "^1.4.0"
+  }
+}

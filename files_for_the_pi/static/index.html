@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+    <title>Remote Control Car with Node.js Server</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link rel="stylesheet" href="/css/style.css">
+
+</head>
+
+<html>
+
+<body>
+    <ul id="gamepads"></ul>
+    <div class="container">
+        <div id="controls">
+            <div>
+                <button id="btn-up" type="button" class="btn btn-default btn-lg btn-up" aria-label="Up Button">
+                    <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="left-right-btn">
+                <button id="btn-left" type="button" class="btn btn-default btn-lg btn-left" aria-label="Left Button">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                </button>
+                <button id="btn-right" type="button" class="btn btn-default btn-lg btn-right" aria-label="Right Button">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                </button>
+            </div>
+            <div>
+                <button id="btn-down" type="button" class="btn btn-default btn-lg btn-down" aria-label="Down Button">
+                    <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+                </button>
+            </div>
+            <p id="connect-notice">Connect your controller and press any button.</p>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="/js/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="/js/jquery.mobile-events.min.js"></script>
+<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+<script type="text/javascript" src="/js/async.js"></script>
+<script type="text/javascript" src="/js/gamepad.js"></script>
+<script type="text/javascript" src="/js/script.js"></script>
+
+</html>

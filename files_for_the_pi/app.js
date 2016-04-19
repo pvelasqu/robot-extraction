@@ -5,7 +5,7 @@ var
     Gpio = require('pigpio').Gpio;
 
 
-var socket = require('socket.io-client')('http://www.631design.com');
+var socket = require('socket.io-client')('http://141.117.161.70:22788/');
 
 
 //the car code starts here
@@ -62,7 +62,7 @@ var car = {
     resetBall: function () {
         gpio.write(7, 0, function (err) {});
     },
-    //for moving forward we power both motors  
+    //for moving forward we power both motors
     moveForward: function () {
 
         leftPower.pwmWrite(leftPowerAmount, function (err) {});
@@ -86,7 +86,7 @@ var car = {
         gpio.write(this.motors.rightBack, 1, function (err) {});
     },
 
-    //for turning right we power the left motor 
+    //for turning right we power the left motor
     moveRight: function () {
         leftPower.pwmWrite(leftPowerAmount, function (err) {});
         //  gpio.write(this.motors.leftPower, 1, function (err) {});
@@ -160,7 +160,7 @@ var car = {
     },
 
 
-    //stop both motors in all directions 
+    //stop both motors in all directions
     stop: function () {
         leftPower.pwmWrite(0, function (err) {});
         rightPower.pwmWrite(0, function (err) {});
